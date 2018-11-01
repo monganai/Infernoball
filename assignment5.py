@@ -70,8 +70,40 @@ for i, hash in enumerate(hashes):
      if hash in line:
          pwd = line.split(':')[1]
          xoring = pxor(pwd,shares[i])
-         xored.append(xoring)
+         xored.append(str(xoring))
 pprint(xored)
+
+
+
+
+
+
+def pwds_shares_to_secret(kpwds,kinds,diffs):
+    '''
+        take k passwords, indices of those, and the "public" shares and 
+        recover shamir secret
+    '''
+    shares=[]
+    for i in range(0,len(kpwds)):
+        shares.append(pxor(kpwds[i],diffs[kinds[i]]))
+    secret=sss.SecretSharer.recover_secret(shares)
+    return secret
+
+
+
+
+
+secret=sss.SecretSharer.recover_secret(xored)
+
+print(secret)
+
+xored.pop()
+
+secret=sss.SecretSharer.recover_secret(xored)
+print(secret)
+
+
+
 
 
 
