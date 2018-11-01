@@ -1,4 +1,4 @@
-# great thanks to Jerico Alcaras   and Ciarán Moyne  with python sytanx help  ( my firts python program)
+# great thanks to Jerico Alcaras and Ciaran Moyne  with python sytanx help  ( my first python program)
 
 
 import json
@@ -9,6 +9,8 @@ import base64
 from Crypto.Cipher import AES
 from Crypto import Random
 import hashlib
+import json
+
 
 def load_inferno():                             # loads a .json to a python dict 
     with open('inferno.json') as f:
@@ -21,10 +23,10 @@ pad = lambda s: s + (BLOCK_SIZE - len(s) % BLOCK_SIZE) * chr(BLOCK_SIZE - len(s)
 unpad = lambda s: s[:-ord(s[len(s) - 1:])]
 
 def decrypt(enc, password):
-    private_key = hashlib.sha256(password.encode("utf-8")).digest()
+  #  private_key = hashlib.sha256(password.encode("utf-8")).digest()
     enc = base64.b64decode(enc)
     iv = enc[:16]
-    cipher = AES.new(private_key, AES.MODE_CBC, iv)
+    cipher = AES.new(password.zfill(32).decode('hex'), AES.MODE_CBC, iv)
     return unpad(cipher.decrypt(enc[16:]))
 
 def pxor(pwd,share):
@@ -96,14 +98,25 @@ def pwds_shares_to_secret(kpwds,kinds,diffs):
 
 
 
-secret=sss.SecretSharer.recover_secret(xored)
-
-print(secret)
-
+secret1=sss.SecretSharer.recover_secret(xored)
+print(secret1)
 xored.pop()
+secret2=sss.SecretSharer.recover_secret(xored)
+print(secret2)
 
-secret=sss.SecretSharer.recover_secret(xored)
-print(secret)
+if (secret1 == secret2):
+    print("level complete")
+    ciphertext = inferno_Dict['ciphertext']
+    nextCiphertext = decrypt(ciphertext, secret2)     #pass it ciphertext / secret once passed k
+    outputFile = open('nextLevel.json','a')
+    outputFile.write(nextCiphertext)
+
+    
+    
+    
+    
+
+    
 
 
 
@@ -111,11 +124,6 @@ print(secret)
 
 
 
-#sss.SecretSharer.recover_secret(s[0:2])              get secret 
-#pprint(secret)
-#secrets.append(secret)                                      add to list of secrets 
-#get mode of secrets i guess 
-#decrypted = decrypt(encrypted, password)       pass it ciphertext / secret once passed k
 
 
 
