@@ -1,3 +1,6 @@
+# great thanks to Jerico Alcaras   and Ciarán Moyne  with python sytanx help  ( my firts python program)
+
+
 import json
 from pprint import pprint
 from hashlib import sha256
