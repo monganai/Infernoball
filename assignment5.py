@@ -82,22 +82,6 @@ pprint(xored)
 
 
 
-
-def pwds_shares_to_secret(kpwds,kinds,diffs):
-    '''
-        take k passwords, indices of those, and the "public" shares and 
-        recover shamir secret
-    '''
-    shares=[]
-    for i in range(0,len(kpwds)):
-        shares.append(pxor(kpwds[i],diffs[kinds[i]]))
-    secret=sss.SecretSharer.recover_secret(shares)
-    return secret
-
-
-
-
-
 secret1=sss.SecretSharer.recover_secret(xored)
 print(secret1)
 xored.pop()

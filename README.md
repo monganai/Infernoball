@@ -9,5 +9,11 @@ files :
 	assignment5.py   --  script to decode infernoball
 
 
+	hashsplitter.rb    spltits infernoball hashes into seperate files
+	the inferno.json is the current level
+	previous levels are in the levels folder
+
+
+
 	
 	
