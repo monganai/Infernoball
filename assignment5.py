@@ -94,6 +94,10 @@ if (secret1 == secret2):
     nextCiphertext = decrypt(ciphertext, secret2)     #pass it ciphertext / secret once passed k
     outputFile = open('nextLevel.json','a')
     outputFile.write(nextCiphertext)
+    outputFile = open('secrets.secrets','a')
+    outputFile.write(secret2)
+
+
 
     
     
