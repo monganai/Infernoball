@@ -15,5 +15,13 @@ files :
 
 
 
+
+	usage :  add all cracked hashes to john.pot 
+		run removeDuplicates
+		run assignment5.py
+		if next level.json is created the level has been passed
+
+
+
 	
 	

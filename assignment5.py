@@ -64,7 +64,7 @@ def pxor(pwd,share):
 inferno_Dict = load_inferno()
 hashes = inferno_Dict['hashes']
 shares = inferno_Dict['shares']
-pot = open('john.pot','r')
+pot = open('uniquejohn.pot','r')
 #import pdb; pdb.set_trace()
 lines = pot.read().split('\n')
 xored = []      # list of plaintext xor share
